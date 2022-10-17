@@ -12,8 +12,8 @@ namespace plot
         public SerialPort _serialPort = null;
         public Thread ReadSerialDataThread;
 
-        private double[] liveDataAD = new double[400];
-        private double[] liveDataPIX = new double[400];
+        private double[] liveDataAD = new double[4000];
+        private double[] liveDataPIX = new double[4000];
 
         private List<byte> list = new List<byte>();
         private int nextValueIndex = -1;
@@ -142,6 +142,8 @@ namespace plot
                 Debug.WriteLine(nextValueAD);
                 Debug.WriteLine(nextValuePIX);
 
+                debugTextbox.Text = DateTime.UtcNow.ToString() + "/ " + nextValueAD.ToString() + "/ " + nextValuePIX.ToString();
+
                 _serialValue.RemoveRange(0,  5);
 
                 nextValueIndex = (nextValueIndex < liveDataAD.Length - 1) ? nextValueIndex + 1 : 0;
@@ -170,6 +172,21 @@ namespace plot
 
             MessageBox.Show(threads);
         }
+
+        private void Form1_FormClosing(Object sender, FormClosingEventArgs e)
+        {
+
+            //System.Text.StringBuilder messageBoxCS = new System.Text.StringBuilder();
+            //messageBoxCS.AppendFormat("{0} = {1}", "CloseReason", e.CloseReason);
+            //messageBoxCS.AppendLine();
+            //messageBoxCS.AppendFormat("{0} = {1}", "Cancel", e.Cancel);
+            //messageBoxCS.AppendLine();
+            //MessageBox.Show(messageBoxCS.ToString(), "FormClosing Event");
+
+            _serialPort.WriteLine("Stop");
+            _serialPort.Close();
+        }
+
 
         private void updateData()
         {

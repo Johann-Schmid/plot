@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.plot = new System.Windows.Forms.TabPage();
+            this.debugTextbox = new System.Windows.Forms.TextBox();
             this.Threads = new System.Windows.Forms.Button();
             this.startSerial = new System.Windows.Forms.Button();
             this.formsPlot1 = new ScottPlot.FormsPlot();
@@ -36,7 +37,6 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.serialComboBox = new System.Windows.Forms.ComboBox();
             this.tabControl = new System.Windows.Forms.TabControl();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.plot.SuspendLayout();
             this.config.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -45,20 +45,29 @@
             // 
             // plot
             // 
+            this.plot.Controls.Add(this.debugTextbox);
             this.plot.Controls.Add(this.Threads);
             this.plot.Controls.Add(this.startSerial);
             this.plot.Controls.Add(this.formsPlot1);
             this.plot.Location = new System.Drawing.Point(4, 24);
             this.plot.Name = "plot";
             this.plot.Padding = new System.Windows.Forms.Padding(3);
-            this.plot.Size = new System.Drawing.Size(991, 580);
+            this.plot.Size = new System.Drawing.Size(1015, 679);
             this.plot.TabIndex = 0;
             this.plot.Text = "Plot";
             this.plot.UseVisualStyleBackColor = true;
             // 
+            // debugTextbox
+            // 
+            this.debugTextbox.Cursor = System.Windows.Forms.Cursors.SizeAll;
+            this.debugTextbox.Location = new System.Drawing.Point(214, 0);
+            this.debugTextbox.Name = "debugTextbox";
+            this.debugTextbox.Size = new System.Drawing.Size(460, 23);
+            this.debugTextbox.TabIndex = 2;
+            // 
             // Threads
             // 
-            this.Threads.Location = new System.Drawing.Point(111, 536);
+            this.Threads.Location = new System.Drawing.Point(133, 0);
             this.Threads.Name = "Threads";
             this.Threads.Size = new System.Drawing.Size(75, 23);
             this.Threads.TabIndex = 2;
@@ -68,7 +77,7 @@
             // 
             // startSerial
             // 
-            this.startSerial.Location = new System.Drawing.Point(30, 536);
+            this.startSerial.Location = new System.Drawing.Point(52, 0);
             this.startSerial.Name = "startSerial";
             this.startSerial.Size = new System.Drawing.Size(75, 23);
             this.startSerial.TabIndex = 1;
@@ -78,10 +87,11 @@
             // 
             // formsPlot1
             // 
-            this.formsPlot1.Location = new System.Drawing.Point(0, 0);
+            this.formsPlot1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.formsPlot1.Location = new System.Drawing.Point(3, 3);
             this.formsPlot1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.formsPlot1.Name = "formsPlot1";
-            this.formsPlot1.Size = new System.Drawing.Size(991, 530);
+            this.formsPlot1.Size = new System.Drawing.Size(1009, 673);
             this.formsPlot1.TabIndex = 0;
             // 
             // config
@@ -90,7 +100,7 @@
             this.config.Location = new System.Drawing.Point(4, 24);
             this.config.Name = "config";
             this.config.Padding = new System.Windows.Forms.Padding(3);
-            this.config.Size = new System.Drawing.Size(991, 580);
+            this.config.Size = new System.Drawing.Size(1015, 679);
             this.config.TabIndex = 1;
             this.config.Text = "Config";
             this.config.UseVisualStyleBackColor = true;
@@ -121,36 +131,29 @@
             // 
             this.tabControl.Controls.Add(this.plot);
             this.tabControl.Controls.Add(this.config);
-            this.tabControl.Location = new System.Drawing.Point(12, 12);
+            this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(999, 608);
+            this.tabControl.Size = new System.Drawing.Size(1023, 707);
             this.tabControl.TabIndex = 1;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Cursor = System.Windows.Forms.Cursors.SizeAll;
-            this.textBox1.Location = new System.Drawing.Point(85, 658);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(460, 23);
-            this.textBox1.TabIndex = 2;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1023, 707);
-            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.tabControl);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.plot.ResumeLayout(false);
+            this.plot.PerformLayout();
             this.config.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tabControl.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -161,7 +164,7 @@
         private TabPage config;
         private TabControl tabControl;
         private Button startSerial;
-        private TextBox textBox1;
+        private TextBox debugTextbox;
         private Button Threads;
         private TableLayoutPanel tableLayoutPanel1;
         private ComboBox serialComboBox;
