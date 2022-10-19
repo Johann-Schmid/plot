@@ -30,12 +30,12 @@
         {
             this.plot = new System.Windows.Forms.TabPage();
             this.debugTextbox = new System.Windows.Forms.TextBox();
-            this.Threads = new System.Windows.Forms.Button();
-            this.startSerial = new System.Windows.Forms.Button();
             this.formsPlot1 = new ScottPlot.FormsPlot();
             this.config = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.serialComboBox = new System.Windows.Forms.ComboBox();
+            this.startSerial = new System.Windows.Forms.Button();
+            this.Threads = new System.Windows.Forms.Button();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.plot.SuspendLayout();
             this.config.SuspendLayout();
@@ -46,8 +46,6 @@
             // plot
             // 
             this.plot.Controls.Add(this.debugTextbox);
-            this.plot.Controls.Add(this.Threads);
-            this.plot.Controls.Add(this.startSerial);
             this.plot.Controls.Add(this.formsPlot1);
             this.plot.Location = new System.Drawing.Point(4, 24);
             this.plot.Name = "plot";
@@ -60,30 +58,10 @@
             // debugTextbox
             // 
             this.debugTextbox.Cursor = System.Windows.Forms.Cursors.SizeAll;
-            this.debugTextbox.Location = new System.Drawing.Point(214, 0);
+            this.debugTextbox.Location = new System.Drawing.Point(555, 0);
             this.debugTextbox.Name = "debugTextbox";
             this.debugTextbox.Size = new System.Drawing.Size(460, 23);
             this.debugTextbox.TabIndex = 2;
-            // 
-            // Threads
-            // 
-            this.Threads.Location = new System.Drawing.Point(133, 0);
-            this.Threads.Name = "Threads";
-            this.Threads.Size = new System.Drawing.Size(75, 23);
-            this.Threads.TabIndex = 2;
-            this.Threads.Text = "Thread";
-            this.Threads.UseVisualStyleBackColor = true;
-            this.Threads.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // startSerial
-            // 
-            this.startSerial.Location = new System.Drawing.Point(52, 0);
-            this.startSerial.Name = "startSerial";
-            this.startSerial.Size = new System.Drawing.Size(75, 23);
-            this.startSerial.TabIndex = 1;
-            this.startSerial.Text = "Start";
-            this.startSerial.UseVisualStyleBackColor = true;
-            this.startSerial.Click += new System.EventHandler(this.startSerial_Click);
             // 
             // formsPlot1
             // 
@@ -107,15 +85,19 @@
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnCount = 3;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.Controls.Add(this.serialComboBox, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.startSerial, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.Threads, 0, 2);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.Size = new System.Drawing.Size(991, 580);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
@@ -124,8 +106,28 @@
             this.serialComboBox.FormattingEnabled = true;
             this.serialComboBox.Location = new System.Drawing.Point(3, 3);
             this.serialComboBox.Name = "serialComboBox";
-            this.serialComboBox.Size = new System.Drawing.Size(489, 23);
+            this.serialComboBox.Size = new System.Drawing.Size(75, 23);
             this.serialComboBox.TabIndex = 0;
+            // 
+            // startSerial
+            // 
+            this.startSerial.Location = new System.Drawing.Point(3, 32);
+            this.startSerial.Name = "startSerial";
+            this.startSerial.Size = new System.Drawing.Size(75, 23);
+            this.startSerial.TabIndex = 3;
+            this.startSerial.Text = "Start";
+            this.startSerial.UseVisualStyleBackColor = true;
+            this.startSerial.Click += new System.EventHandler(this.startSerial_Click);
+            // 
+            // Threads
+            // 
+            this.Threads.Location = new System.Drawing.Point(3, 61);
+            this.Threads.Name = "Threads";
+            this.Threads.Size = new System.Drawing.Size(75, 23);
+            this.Threads.TabIndex = 4;
+            this.Threads.Text = "Thread";
+            this.Threads.UseVisualStyleBackColor = true;
+            this.Threads.Click += new System.EventHandler(this.button1_Click);
             // 
             // tabControl
             // 
@@ -163,10 +165,10 @@
         private ScottPlot.FormsPlot formsPlot1;
         private TabPage config;
         private TabControl tabControl;
-        private Button startSerial;
         private TextBox debugTextbox;
-        private Button Threads;
         private TableLayoutPanel tableLayoutPanel1;
         private ComboBox serialComboBox;
+        private Button startSerial;
+        private Button Threads;
     }
 }

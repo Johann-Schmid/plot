@@ -9,6 +9,8 @@ namespace plot
 {
     public partial class Form1 : Form
     {
+        private static Mutex mut = new Mutex();
+
         public SerialPort _serialPort = null;
         public Thread ReadSerialDataThread;
 
@@ -71,6 +73,7 @@ namespace plot
             //double[] dataY = new double[] { 1, 4, 9, 16, 25 };
             //formsPlot1.Plot.AddScatter(dataX, dataY);
             //formsPlot1.Refresh();
+            Debug.WriteLine("HelloWorld");
         }
 
         private void startSerial_Click(object sender, EventArgs e)
@@ -107,8 +110,10 @@ namespace plot
                     SerialPort sp = (SerialPort)sender;
                     while(sp.BytesToRead > 0)
                     {
+                        mut.WaitOne();
                         list.Add(Convert.ToByte(sp.ReadByte()));
-                        //Debug.WriteLine(sp.ReadByte());
+                        mut.ReleaseMutex();
+                        Debug.WriteLine("Read");
                     }
                 }
                 catch
@@ -144,7 +149,10 @@ namespace plot
 
                 debugTextbox.Text = DateTime.UtcNow.ToString() + "/ " + nextValueAD.ToString() + "/ " + nextValuePIX.ToString();
 
+                mut.WaitOne();
                 _serialValue.RemoveRange(0,  5);
+                Debug.WriteLine(_serialValue.Count);
+                mut.ReleaseMutex();
 
                 nextValueIndex = (nextValueIndex < liveDataAD.Length - 1) ? nextValueIndex + 1 : 0;
                 liveDataAD[nextValueIndex] = Convert.ToDouble(nextValueAD);
@@ -183,8 +191,26 @@ namespace plot
             //messageBoxCS.AppendLine();
             //MessageBox.Show(messageBoxCS.ToString(), "FormClosing Event");
 
-            _serialPort.WriteLine("Stop");
-            _serialPort.Close();
+            try
+            {
+                if (_serialPort.IsOpen)
+                {
+                    Thread.Sleep(100);
+                    if (_serialPort.BytesToRead > 0)
+                    {
+                        _serialPort.WriteLine("Stop");
+                        _serialPort.Close();
+                    }
+                }
+                else
+                {
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "SerialInterface Event");
+            }
         }
 
 
