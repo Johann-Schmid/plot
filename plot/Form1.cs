@@ -9,6 +9,8 @@ namespace plot
 {
     public partial class Form1 : Form
     {
+        private static System.Threading.Timer aTimer;
+
         private static Mutex mut = new Mutex();
 
         public SerialPort _serialPort = null;
@@ -67,6 +69,11 @@ namespace plot
 
         }
 
+        public void setText(string message)
+        {
+            debugTextbox.Text = message;
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
             //double[] dataX = new double[] { 1, 2, 3, 4, 5 };
@@ -99,6 +106,30 @@ namespace plot
             }
             
 
+
+        }
+
+        private void simulateData_Click(object sender, EventArgs e)
+        {
+            TimerCallback timerCallback = new TimerCallback(sendSimulationData);
+            aTimer = new System.Threading.Timer(timerCallback, null, 0, 100);
+
+
+            Debug.WriteLine("Press the Enter key to exit the program at any time... ");
+        }
+
+        private void sendSimulationData(Object source)
+        {
+            Debug.WriteLine("The Elapsed event was raised at {0}", DateTime.Now);
+            mut.WaitOne();
+            list.Add(Convert.ToByte(0xC9));
+            list.Add(Convert.ToByte(0x00));
+            list.Add(Convert.ToByte(0xC8));
+            list.Add(Convert.ToByte(0x00));
+            list.Add(Convert.ToByte(0x0A));
+            mut.ReleaseMutex();
+            Debug.WriteLine("Read");
+            this.BeginInvoke(new ShowSerialData(LineReceived), list);
 
         }
 
